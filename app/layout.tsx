@@ -1,18 +1,17 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import {  Lato  } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import Navbar from "@/components/Navbar"
+import { Toaster } from "@/components/ui/sonner"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lato = Lato({
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
+  variable: "--font-lato",
 })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
+
 
 export const metadata: Metadata = {
   title: "FinTrack",
@@ -27,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang='pl' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${lato.variable} antialiased`}
       >
         <ThemeProvider
           attribute='class'
@@ -37,6 +36,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

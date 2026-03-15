@@ -11,14 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useState } from "react"
+import Link from "next/link"
 const Navbar = () => {
   const [month, setMonth] = useState<string>('current')
   return (
     <nav className='w-full max-w-8xl mx-auto h-16 flex items-center justify-between md:px-8 px-4 border-b'>
-      <div className='flex items-center gap-4'>
+      <Link href='/' className='flex items-center gap-4'>
         <StreamlineStickiesColorPileOfMoney />
         <span className='text-2xl font-bold'>FinTrack</span>
-      </div>
+      </Link>
       <div>{month === 'current' ? 'Bieżący miesiąc' : 'Poprzedni miesiąc'}</div>
       <div className='flex items-center gap-2'>
         <Select onValueChange={(value) => setMonth(value)}>
