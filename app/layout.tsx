@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import Navbar from "@/components/Navbar"
 import { Toaster } from "@/components/ui/sonner"
+import Footer from "@/components/Footer"
 
 const lato = Lato({
   weight: ["400", "700", "900"],
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang='pl' suppressHydrationWarning>
       <body
-        className={`${lato.variable} antialiased`}
+        className={` ${lato.variable} antialiased`}
       >
         <ThemeProvider
           attribute='class'
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Toaster />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

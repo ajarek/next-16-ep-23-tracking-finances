@@ -17,13 +17,11 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useTransactionRegister } from "@/store/transactionRegister"
 import {
   InputGroup,
   InputGroupAddon,
@@ -39,21 +37,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useTransactionRegister } from "@/store/transactionRegister"
 import { Record } from "@/types/typeRecord"
 
 const formSchema = z.object({
   amount: z.number().min(1, "Amount must be at least 1 character."),
-  description: z
-    .string()
-  .optional(),
+  description: z.string().optional(),
   category: z.string().min(1, "Category is required."),
   date: z.string().min(1, "Date is required."),
 })
-
 const generateId = () => Math.floor(Math.random() * 10000000);
 
-const AddIncomeForm = () => {
-  const {addItemToRecords} = useTransactionRegister()
+const AddExpenseForm = () => {
+  const { addItemToRecords } = useTransactionRegister()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,14 +61,14 @@ const AddIncomeForm = () => {
   })
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    const record: Record = {
-      id: generateId(),
-      type: "income",
-      amount: data.amount,
-      category: data.category,
-      description: data.description || "",
-      date: data.date,
-    }
+   const record: Record = {
+         id: generateId(),
+         type: "expense",
+         amount: data.amount,
+         category: data.category,
+         description: data.description || "",
+         date: data.date,
+       }
     addItemToRecords(record)
     toast("You submitted the following values:", {
       description: (
@@ -94,10 +90,10 @@ const AddIncomeForm = () => {
     <Card className='w-full sm:max-w-md'>
       <CardHeader>
         <CardTitle className='flex items-center gap-2 '>
-          <span className='w-12 h-12 rounded-full bg-accent flex items-center justify-center text-accent-foreground'>
+          <span className='w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground'>
             <Sparkles />
           </span>{" "}
-          <span className='text-3xl text-accent'>Dodaj dochód</span>
+          <span className='text-3xl text-primary'>Dodaj wydatek</span>
         </CardTitle>
         <CardDescription>Wpisz kwotę i wybierz kategorię.</CardDescription>
       </CardHeader>
@@ -149,11 +145,15 @@ const AddIncomeForm = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value='Pensja'>Pensja</SelectItem>
-                        <SelectItem value='Wynajem'>Wynajem</SelectItem>
-                        <SelectItem value='Oprocentowanie'>Oprocentowanie</SelectItem>
-                        <SelectItem value='Dywidendy'>Dywidendy</SelectItem>
-                        <SelectItem value='Bonus'>Bonus</SelectItem>
+                        <SelectItem value='Transport'>
+                          Transport
+                        </SelectItem>
+                        <SelectItem value='Rozrywka'>Rozrywka</SelectItem>
+                        <SelectItem value='Zdrowie'>Zdrowie</SelectItem>
+                        <SelectItem value='Opłaty'>Opłaty</SelectItem>
+                        <SelectItem value='Zakupy'>Zakupy</SelectItem>
+                        <SelectItem value='Restauracja'>Restauracja</SelectItem>
+                        <SelectItem value='Edukacja'>Edukacja</SelectItem>
                         <SelectItem value='Inne'>Inne</SelectItem>
                       </SelectGroup>
                     </SelectContent>
@@ -200,7 +200,7 @@ const AddIncomeForm = () => {
                     />
                     <InputGroupAddon align='block-end'>
                       <InputGroupText className='tabular-nums'>
-                        {field.value?.length || 0}/100 characters
+                        {field.value?.length}/100 characters
                       </InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>
@@ -228,7 +228,7 @@ const AddIncomeForm = () => {
             form='form-rhf-demo'
             className='w-1/2 bg-accent text-accent-foreground hover:bg-accent/90'
           >
-            Dodaj dochód
+            Dodaj wydatek
           </Button>
         </Field>
       </CardFooter>
@@ -236,4 +236,4 @@ const AddIncomeForm = () => {
   )
 }
 
-export default AddIncomeForm
+export default AddExpenseForm
