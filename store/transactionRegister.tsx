@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
 import type { Record } from "@/types/typeRecord"
+import { transactionRegister } from "@/data/data-transaction"
 
 type RegisterState = {
    items: Record[]
@@ -12,7 +13,7 @@ type RegisterState = {
 export const useTransactionRegister = create<RegisterState>()(
   persist(
     (set, get) => ({
-      items: [],
+      items: [...transactionRegister],
 
       addItemToRecords: (item: Record) =>
         set((state) => ({
