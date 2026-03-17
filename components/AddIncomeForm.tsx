@@ -88,6 +88,7 @@ const AddIncomeForm = () => {
         "--border-radius": "calc(var(--radius)  + 4px)",
       } as React.CSSProperties,
     })
+    form.reset()
   }
 
   return (
@@ -112,6 +113,7 @@ const AddIncomeForm = () => {
                   <FieldLabel htmlFor='form-rhf-demo-amount'>Kwota</FieldLabel>
                   <Input
                     {...field}
+                    value={Number.isNaN(field.value) ? "" : field.value}
                     type='number'
                     id='form-rhf-demo-amount'
                     min={0}
@@ -217,16 +219,9 @@ const AddIncomeForm = () => {
       <CardFooter>
         <Field orientation='horizontal'>
           <Button
-            type='button'
-            onClick={() => form.reset()}
-            className='w-1/2 bg-primary text-primary-foreground hover:bg-primary/90'
-          >
-            Reset
-          </Button>
-          <Button
             type='submit'
             form='form-rhf-demo'
-            className='w-1/2 bg-accent text-accent-foreground hover:bg-accent/90'
+            className='w-full h-10 bg-accent text-lg text-accent-foreground hover:bg-accent/90 cursor-pointer'
           >
             Dodaj dochód
           </Button>

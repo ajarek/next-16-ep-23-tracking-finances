@@ -46,7 +46,7 @@ const Home = () => {
           Dodaj Koszt
         </Button>
       </div>
-      <RecentActivities title="Ostatnie aktywności" end={5}/>
+      <RecentActivities title="Ostatnie" end={5}/>
     </div>
   )
 }
