@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/select"
 import { useTransactionRegister } from "@/store/transactionRegister"
 import { Record } from "@/types/typeRecord"
+import { categories } from "@/data/data-categories"
 
 const formSchema = z.object({
   amount: z.number().min(1, "Amount must be at least 1 character."),
@@ -46,7 +47,7 @@ const formSchema = z.object({
   category: z.string().min(1, "Category is required."),
   date: z.string().min(1, "Date is required."),
 })
-const generateId = () => Math.floor(Math.random() * 10000000);
+const generateId = () => Math.floor(Math.random() * 10000000)
 
 const AddExpenseForm = () => {
   const { addItemToRecords } = useTransactionRegister()
@@ -61,14 +62,14 @@ const AddExpenseForm = () => {
   })
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-   const record: Record = {
-         id: generateId(),
-         type: "expense",
-         amount: data.amount,
-         category: data.category,
-         description: data.description || "",
-         date: data.date,
-       }
+    const record: Record = {
+      id: generateId(),
+      type: "expense",
+      amount: data.amount,
+      category: data.category,
+      description: data.description || "",
+      date: data.date,
+    }
     addItemToRecords(record)
     toast("You submitted the following values:", {
       description: (
@@ -147,16 +148,11 @@ const AddExpenseForm = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value='Transport'>
-                          Transport
-                        </SelectItem>
-                        <SelectItem value='Rozrywka'>Rozrywka</SelectItem>
-                        <SelectItem value='Zdrowie'>Zdrowie</SelectItem>
-                        <SelectItem value='Opłaty'>Opłaty</SelectItem>
-                        <SelectItem value='Zakupy'>Zakupy</SelectItem>
-                        <SelectItem value='Restauracja'>Restauracja</SelectItem>
-                        <SelectItem value='Edukacja'>Edukacja</SelectItem>
-                        <SelectItem value='Inne'>Inne</SelectItem>
+                        {categories.map((category) => (
+                          <SelectItem key={category.name} value={category.name}>
+                            {category.icon} {category.name}
+                          </SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
