@@ -42,10 +42,10 @@ import { Record } from "@/types/typeRecord"
 import { categories } from "@/data/data-categories"
 
 const formSchema = z.object({
-  amount: z.number().min(1, "Amount must be at least 1 character."),
+  amount: z.number().min(0.01, "Kwota musi być większa od zera."),
   description: z.string().optional(),
-  category: z.string().min(1, "Category is required."),
-  date: z.string().min(1, "Date is required."),
+  category: z.string().min(1, "Kategoria jest wymagana."),
+  date: z.string().min(1, "Data jest wymagana."),
 })
 const generateId = () => Math.floor(Math.random() * 10000000)
 
@@ -71,19 +71,8 @@ const AddExpenseForm = () => {
       date: data.date,
     }
     addItemToRecords(record)
-    toast("You submitted the following values:", {
-      description: (
-        <pre className='mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground'>
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    toast.success("Wydatek został dodany pomyślnie!", {
       position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
     })
     form.reset()
   }
@@ -198,7 +187,7 @@ const AddExpenseForm = () => {
                     />
                     <InputGroupAddon align='block-end'>
                       <InputGroupText className='tabular-nums'>
-                        {field.value?.length}/100 characters
+                        {field.value?.length}/100 znaków
                       </InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>

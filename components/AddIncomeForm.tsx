@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -42,18 +41,16 @@ import {
 import { Record } from "@/types/typeRecord"
 
 const formSchema = z.object({
-  amount: z.number().min(1, "Amount must be at least 1 character."),
-  description: z
-    .string()
-  .optional(),
-  category: z.string().min(1, "Category is required."),
-  date: z.string().min(1, "Date is required."),
+  amount: z.number().min(0.01, "Kwota musi być większa od zera."),
+  description: z.string().optional(),
+  category: z.string().min(1, "Kategoria jest wymagana."),
+  date: z.string().min(1, "Data jest wymagana."),
 })
 
-const generateId = () => Math.floor(Math.random() * 10000000);
+const generateId = () => Math.floor(Math.random() * 10000000)
 
 const AddIncomeForm = () => {
-  const {addItemToRecords} = useTransactionRegister()
+  const { addItemToRecords } = useTransactionRegister()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,19 +71,8 @@ const AddIncomeForm = () => {
       date: data.date,
     }
     addItemToRecords(record)
-    toast("You submitted the following values:", {
-      description: (
-        <pre className='mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground'>
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    toast.success("Dochód został dodany pomyślnie!", {
       position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
     })
     form.reset()
   }
@@ -153,7 +139,9 @@ const AddIncomeForm = () => {
                       <SelectGroup>
                         <SelectItem value='Pensja'>Pensja</SelectItem>
                         <SelectItem value='Wynajem'>Wynajem</SelectItem>
-                        <SelectItem value='Oprocentowanie'>Oprocentowanie</SelectItem>
+                        <SelectItem value='Oprocentowanie'>
+                          Oprocentowanie
+                        </SelectItem>
                         <SelectItem value='Dywidendy'>Dywidendy</SelectItem>
                         <SelectItem value='Bonus'>Bonus</SelectItem>
                         <SelectItem value='Inne'>Inne</SelectItem>
@@ -202,7 +190,7 @@ const AddIncomeForm = () => {
                     />
                     <InputGroupAddon align='block-end'>
                       <InputGroupText className='tabular-nums'>
-                        {field.value?.length || 0}/100 characters
+                        {field.value?.length || 0}/100 znaków
                       </InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>

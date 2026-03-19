@@ -1,7 +1,7 @@
 "use client"
 
 import { ModeToggle } from "./ModeToggle"
-import StreamlineStickiesColorPileOfMoney from "./MoneyIcons"
+import StreamlineStickiesColorPileOfMoney from "../public/MoneyIcons"
 import Link from "next/link"
 const Navbar = () => {
   return (

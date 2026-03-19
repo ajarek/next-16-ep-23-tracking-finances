@@ -34,9 +34,17 @@ const RecentActivities = ({
           {title} ({end ? end : "wszystkie"})
         </h2>
         <div className='w-full flex items-center justify-end gap-2'>
-          <div className="relative">
-            <Search color="gray" className="absolute left-2 top-1/2 -translate-y-1/2" />
-          <Input type="search" placeholder="Szukaj" className="max-md:hidden pl-8" onChange={(e) => setSearch(e.target.value)} />
+          <div className='relative max-md:hidden'>
+            <Search
+              color='gray'
+              className='absolute left-2 top-1/2 -translate-y-1/2'
+            />
+            <Input
+              type='search'
+              placeholder='Szukaj'
+              className='max-md:hidden pl-8'
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
           <Button
             variant={filter === "all" ? "default" : "outline"}
@@ -84,7 +92,9 @@ const RecentActivities = ({
             {items
               .filter((item) => {
                 if (search === "") return true
-                return item.description.toLowerCase().includes(search.toLowerCase())
+                return item.description
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
               })
               .filter((item) => {
                 if (filter === "all") return true

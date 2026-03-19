@@ -4,7 +4,7 @@ import type { Record } from "@/types/typeRecord"
 import { transactionRegister } from "@/data/data-transaction"
 
 type RegisterState = {
-   items: Record[]
+  items: Record[]
   addItemToRecords: (item: Record) => void
   removeItemFromRecords: (id: number) => void
   removeAllFromRecords: () => void
@@ -28,6 +28,9 @@ export const useTransactionRegister = create<RegisterState>()(
       removeAllFromRecords: () => set({ items: [] }),
     }),
 
-    { name: "transactionRegister", storage: createJSONStorage(() => localStorage) },
+    {
+      name: "transactionRegister",
+      storage: createJSONStorage(() => localStorage),
+    },
   ),
 )

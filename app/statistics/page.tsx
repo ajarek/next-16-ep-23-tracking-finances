@@ -26,10 +26,7 @@ import {
 } from "@/components/ui/chart"
 import React from "react"
 
-
-
 const StatisticsPage = () => {
-
   const chartConfig = {
     income: {
       label: "Dochody",
@@ -41,40 +38,40 @@ const StatisticsPage = () => {
     },
   } satisfies ChartConfig
 
-const chartConfigPie = {
-  Transport: {
-    label: "Transport",
-    color: "var(--chart-1)",
-  },
-  Rozrywka: {
-    label: "Rozrywka",
-    color: "var(--chart-2)",
-  },
-  Zdrowie: {
-    label: "Zdrowie",
-    color: "var(--chart-3)",
-  },
-  Opłaty: {
-    label: "Opłaty",
-    color: "var(--chart-4)",
-  },
-  Zakupy: {
-    label: "Zakupy",
-    color: "var(--chart-5)",
-  },
-  Restauracja: {
-    label: "Restauracja",
-    color: "var(--chart-6)",
-  },
-  Edukacja: {
-    label: "Edukacja",
-    color: "var(--chart-7)",
-  },
-  Inne: {
-    label: "Inne",
-    color: "var(--chart-8)",
-  },
-} satisfies ChartConfig  
+  const chartConfigPie = {
+    Transport: {
+      label: "Transport",
+      color: "var(--chart-1)",
+    },
+    Rozrywka: {
+      label: "Rozrywka",
+      color: "var(--chart-2)",
+    },
+    Zdrowie: {
+      label: "Zdrowie",
+      color: "var(--chart-3)",
+    },
+    Opłaty: {
+      label: "Opłaty",
+      color: "var(--chart-4)",
+    },
+    Zakupy: {
+      label: "Zakupy",
+      color: "var(--chart-5)",
+    },
+    Restauracja: {
+      label: "Restauracja",
+      color: "var(--chart-6)",
+    },
+    Edukacja: {
+      label: "Edukacja",
+      color: "var(--chart-7)",
+    },
+    Inne: {
+      label: "Inne",
+      color: "var(--chart-8)",
+    },
+  } satisfies ChartConfig
 
   const { items } = useTransactionRegister()
 
@@ -124,7 +121,9 @@ const chartConfigPie = {
   return (
     <div className='min-h-[calc(100vh-4rem)] flex flex-col items-center justify-start gap-4 px-4 md:px-8 pt-4 pb-20'>
       <div className='w-full flex items-center justify-center'>
-        <h2 className='text-2xl font-bold'>Statystyki za okres {chartData[0].month}</h2>
+        <h2 className='text-2xl font-bold'>
+          Statystyki za okres {chartData[0].month}
+        </h2>
       </div>
 
       <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
